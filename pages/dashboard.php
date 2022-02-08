@@ -104,7 +104,7 @@
             <div class="icon">
               <i class="fas fa-wallet"></i>
             </div>
-            <a href="?pages=kerja" class="small-box-footer">Lihat selengkapnya <i
+            <a href="?pages=penjualan" class="small-box-footer">Lihat selengkapnya <i
                 class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
