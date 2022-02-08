@@ -85,7 +85,7 @@ error_reporting (E_ALL ^ E_NOTICE);
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4 text-black" style="background-color:rgb(47, 107, 219);">
       <!-- Brand Logo -->
-      <a href="indexAdm.php" class="brand-link">
+      <a href="index.php" class="brand-link">
         <img src="dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light" style="font-family : Poppins">Bank Sampah</span>
       </a>
