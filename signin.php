@@ -62,8 +62,8 @@ if (isset($_POST['btnLogin'])) LoginUser();
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
+        <h6 style="color:black">Registrasi Nasabah</h6>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h6 class="modal-title" style="color:black">Register Nasabah</h6>
         </div>
         <div class="modal-body">
           <form action="pages/reg_anggota.php" method="post" enctype="multipart/form-data">

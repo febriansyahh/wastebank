@@ -207,12 +207,14 @@ error_reporting (E_ALL ^ E_NOTICE);
                 </li>
               </ul>
           </li>
+
           <li class="nav-item">
             <a href="?pages=nasabah" class="nav-link">
               <i class="fas fa-users nav-icon"></i>
               <p>Data Nasabah</p>
             </a>
           </li>
+
             <li class="nav-header">Laporan</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -223,29 +225,28 @@ error_reporting (E_ALL ^ E_NOTICE);
                 </p>
               </a>
               <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  <a href="?pages=report_transaksi" class="nav-link">
+                    <i class="fas fa-file nav-icon"></i>
+                    <p>Laporan Data Transaksi</p>
+                  </a>
+                </li>
                 <li class="nav-item">
                   <a href="?pages=report_nasabah" class="nav-link">
                     <i class="fas fa-file nav-icon"></i>
                     <p>Laporan Data Nasabah</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a href="?pages=report_sampah" class="nav-link">
                     <i class="fas fa-file nav-icon"></i>
                     <p>Laporan Data Sampah</p>
                   </a>
-                </li>
-                <li class="nav-item">
-                  <a href="?pages=report_transaksi" class="nav-link">
-                    <i class="fas fa-file nav-icon"></i>
-                    <p>Laporan Data Transaksi</p>
-                  </a>
-                </li>
-                
+                </li> -->
               </ul>
             </li>
-
-          <!-- <li class="nav-item">
+<!-- 
+          <li class="nav-item">
             <a href="?pages=penjualan" class="nav-link">
               <i class="fa fa-shopping-basket nav-icon"></i>
               <p>Data Penjualan</p>
@@ -286,20 +287,20 @@ error_reporting (E_ALL ^ E_NOTICE);
               <a href="?pages=saldo" class="nav-link">
                 <i class="nav-icon fas fa-receipt"></i>
                 <p>
-                  Info Saldo
+                  Info Saldo Penarikan
                 </p>
               </a>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="?pages=produk" class="nav-link">
                 <i class="fas fa-history nav-icon"></i>
                 <p>Produk Daur Ulang</p>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
-              <a href="?pages=terbeli" class="nav-link">
-                <i class="fas fa-shopping-cart nav-icon"></i>
+              <a href="?pages=transaksi" class="nav-link">
+                <i class="fas fa-history nav-icon"></i>
                 <p>
                   Riwayat Transaksi
                 </p>
@@ -405,6 +406,10 @@ error_reporting (E_ALL ^ E_NOTICE);
 
                             case 'saldo' :
                               include "pages/saldo/view.php";
+                              break;
+
+                            case 'transaksi' :
+                              include "pages/saldo/view_t.php";
                               break;
 
                             case 'terbeli' :

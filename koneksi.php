@@ -234,11 +234,10 @@ function MaxIdProduk()
 function insertSampah()
 {
   global $con;
-  $sql_insert = "INSERT INTO sampah (kode_sampah, nama_sampah, id_jenis, daur_ulang, harga) VALUES (
+  $sql_insert = "INSERT INTO sampah (kode_sampah, nama_sampah, id_jenis, harga) VALUES (
 					'" . $_POST['kode'] . "',
 					'" . $_POST['nama'] . "',
 					'" . $_POST['jenis'] . "',
-					'" . $_POST['daur'] . "',
 					'" . $_POST['harga'] . "')";
 
   $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
@@ -611,29 +610,36 @@ function insertPembelian()
   $total = $_POST['harga'];
   if($pilihan == '1'){
 
-    $cek_nasabah = "SELECT id_nasabah, jumlah_tabungan FROM tabungan WHERE id_nasabah='$id_nasabah'";
-    $query = mysqli_query($con, $cek_nasabah);
-    $row = mysqli_fetch_row($query);
-    $nasabah = $row[0];
-    $tabungan = $row[1];
+    // $cek_nasabah = "SELECT id_nasabah, jumlah_tabungan FROM tabungan WHERE id_nasabah='$id_nasabah'";
+    // $query = mysqli_query($con, $cek_nasabah);
+    // $row = mysqli_fetch_row($query);
+    // $nasabah = $row[0];
+    // $tabungan = $row[1];
 
-    $total = $tabungan + $total;
+    // $total = $tabungan + $total;
     $date = date('Y-m-d H:i:s');
 
-    if($nasabah != NULL){
-      $sql_ubah = "UPDATE tabungan SET
-          jumlah_tabungan ='" . $total . "',
-          update_terakhir = '$date'
-          WHERE id_nasabah = '$nasabah'";
-      $query_tabungan= mysqli_query($con, $sql_ubah);
-    }else{
-      $sql_insert = "INSERT INTO tabungan (id_nasabah, jumlah_tabungan, update_terakhir) VALUES (
-        '" . $_POST['id_nasabah'] . "',
-        '" . $total . "',
-        '" . $date . "')";
+    // if($nasabah != NULL){
+    //   $sql_ubah = "UPDATE tabungan SET
+    //       jumlah_tabungan ='" . $total . "',
+    //       update_terakhir = '$date'
+    //       WHERE id_nasabah = '$nasabah'";
+    //   $query_tabungan= mysqli_query($con, $sql_ubah);
+    // }else{
+    //   $sql_insert = "INSERT INTO tabungan (id_nasabah, jumlah_tabungan, update_terakhir) VALUES (
+    //     '" . $_POST['id_nasabah'] . "',
+    //     '" . $total . "',
+    //     '" . $date . "')";
   
-      $query_tabungan = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
-    }
+    //   $query_tabungan = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
+    // }
+
+    $sql_insert = "INSERT INTO tabungan (id_nasabah, jumlah_tabungan, update_terakhir) VALUES (
+      '" . $_POST['id_nasabah'] . "',
+      '" . $total . "',
+      '" . $date . "')";
+
+    $query_tabungan = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
 
     $sql_insert = "INSERT INTO pembelian (id_sampah, id_nasabah, tanggal, berat, total, pilihan, tgl_proses) VALUES (
       '" . $_POST['id_sampah'] . "',
@@ -691,10 +697,11 @@ function updatePembelian()
   if($pilihan == '0'){
 
     $total = $tabungan - $total;
-    $sql_ubah = "UPDATE tabungan SET
-          jumlah_tabungan ='" . $total . "',
-          update_terakhir = '$date'
-          WHERE id_nasabah = '$nasabah'";
+    // $sql_ubah = "UPDATE tabungan SET
+    //       jumlah_tabungan ='" . $total . "',
+    //       update_terakhir = '$date'
+    //       WHERE id_nasabah = '$nasabah'";
+    $sql_ubah = "DELETE FROM tabungan WHERE id_nasabah ='$nasabah' AND jumlah_tabungan = '$tabungan' ";
     $query_tabungan= mysqli_query($con, $sql_ubah);
   }
 
@@ -733,17 +740,18 @@ function deletePembelian($id)
 
   if($pilihan == '1'){
 
-    $cek_tabungan = "SELECT jumlah_tabungan FROM tabungan WHERE id_nasabah='$nasabah'";
-    $query = mysqli_query($con, $cek_tabungan);
-    $rows = mysqli_fetch_row($query);
-    $tabungan = $rows[0];
+    // $cek_tabungan = "SELECT jumlah_tabungan FROM tabungan WHERE id_nasabah='$nasabah'";
+    // $query = mysqli_query($con, $cek_tabungan);
+    // $rows = mysqli_fetch_row($query);
+    // $tabungan = $rows[0];
 
-    $harga_cek = $tabungan - $total;
+    // $harga_cek = $tabungan - $total;
 
-    $sql_ubah = "UPDATE tabungan SET
-        jumlah_tabungan ='" . $harga_cek . "',
-        update_terakhir = '$date'
-        WHERE id_nasabah = '$nasabah'";
+    // $sql_ubah = "UPDATE tabungan SET
+    //     jumlah_tabungan ='" . $harga_cek . "',
+    //     update_terakhir = '$date'
+    //     WHERE id_nasabah = '$nasabah'";
+    $sql_ubah = "DELETE FROM tabungan WHERE id_nasabah ='$nasabah' AND jumlah_tabungan = '$total' ";
     $query_ubah = mysqli_query($con, $sql_ubah);
 
     $sql_hapus = "DELETE FROM pembelian WHERE id_pembelian ='$id' ";
@@ -775,7 +783,7 @@ function deletePembelian($id)
 function getTabungan()
 {
   global $con;
-  $sql = "SELECT * FROM tabungan a, nasabah b WHERE a.id_nasabah=b.id_nasabah";
+  $sql = "SELECT a.id_tabungan, a.id_nasabah, b.nama_nasabah, b.alamat, SUM(a.jumlah_tabungan) as total FROM tabungan a, nasabah b WHERE a.id_nasabah=b.id_nasabah GROUP BY b.id_nasabah";
   $query = mysqli_query($con, $sql);
   return $query;
 }
@@ -839,7 +847,8 @@ function deleteTabungan($id)
 function getTarik()
 {
   global $con;
-  $sql = "SELECT a.*, b.jumlah_tabungan, c.* FROM penarikan a, tabungan b, nasabah c WHERE a.id_tabungan=b.id_tabungan AND b.id_nasabah=c.id_nasabah ORDER BY a.tanggal DESC";
+  // $sql = "SELECT a.*, b.jumlah_tabungan, c.* FROM penarikan a, tabungan b, nasabah c WHERE a.id_tabungan=b.id_tabungan AND b.id_nasabah=c.id_nasabah ORDER BY a.tanggal DESC";
+  $sql = "SELECT * FROM penarikan a, nasabah b WHERE a.id_nasabah=b.id_nasabah ORDER BY a.tanggal DESC";
   $query = mysqli_query($con, $sql);
   return $query;
 }
@@ -855,23 +864,24 @@ function insertTarik()
   $query = mysqli_query($con, $cek);
   $rows = mysqli_fetch_row($query);
   $id_tabungan = $rows[0];
-  $tabungan = $rows[1];
+  // $tabungan = $rows[1];
   
-  $saldo_akhir = $tabungan - $penarikan;
+  // $saldo_akhir = $tabungan - $penarikan;
 
-  $sql_ubah = "UPDATE tabungan SET
-        jumlah_tabungan='" . $saldo_akhir . "'
-        WHERE id_tabungan='" . $id_tabungan . "'";
-  $query_ubah = mysqli_query($con, $sql_ubah);
+  // $sql_ubah = "UPDATE tabungan SET
+  //       jumlah_tabungan='" . $saldo_akhir . "'
+  //       WHERE id_tabungan='" . $id_tabungan . "'";
+  // $query_ubah = mysqli_query($con, $sql_ubah);
 
-  $sql_insert = "INSERT INTO penarikan (id_tabungan, jumlah, saldo_akhir, tanggal) VALUES (
-    '" . $id_tabungan . "',
+  $sql_insert = "INSERT INTO penarikan (id_nasabah, jumlah, saldo_akhir, tanggal) VALUES (
+    '" . $nasabah . "',
     '" . $_POST['penarikan'] . "',
     '" . $_POST['saldo'] . "',
     '" . $tgl . "')";
+
   $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
 
-    if ($query_insert && $query_ubah) {
+    if ($query_insert) {
       echo "<script>alert('Penarikan Berhasil')</script>";
       echo "<meta http-equiv='refresh' content='0; url=index.php?pages=tarik'>";
     } else {
@@ -936,7 +946,7 @@ function getPenjualan()
 function getSaldo($id)
 {
   global $con;
-  $sql = "SELECT * FROM penarikan a, tabungan b WHERE a.id_tabungan=b.id_tabungan AND b.id_nasabah='$id'";
+  $sql = "SELECT * FROM penarikan a, tabungan b, nasabah c WHERE a.id_nasabah=c.id_nasabah AND b.id_nasabah=c.id_nasabah AND c.id_nasabah='$id' GROUP BY a.id_penarikan";
   $query = mysqli_query($con, $sql);
   return $query;
 }
@@ -944,7 +954,25 @@ function getSaldo($id)
 function cekSaldo($id)
 {
   global $con;
-  $sql = "SELECT jumlah_tabungan from tabungan where id_nasabah ='$id'";
+
+  $sql = "SELECT SUM(jumlah_tabungan) as jumlah_tabungan from tabungan where id_nasabah ='$id' GROUP BY id_nasabah";
+  $query = mysqli_query($con, $sql);
+  return $query;
+}
+
+function cekTarik($id){
+  global $con;
+  $sql_tarik = "SELECT SUM(jumlah) FROM `penarikan` WHERE id_nasabah ='$id' GROUP BY id_nasabah";
+  $query_tarik = mysqli_query($con, $sql_tarik);
+  // $rows = mysqli_fetch_row($query_tarik);
+  // $tarik = $rows[0];
+  return $query_tarik;
+}
+
+function getPembeli($id)
+{
+  global $con;
+  $sql = "SELECT * FROM nasabah a, pembelian b, sampah c WHERE b.id_nasabah=a.id_nasabah AND b.id_sampah=c.id_sampah AND a.id_nasabah='$id' ORDER BY b.tgl_proses DESC";
   $query = mysqli_query($con, $sql);
   return $query;
 }
