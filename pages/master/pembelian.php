@@ -257,7 +257,7 @@ error_reporting (E_ALL ^ E_NOTICE);
   function sum() {
     var berat = document.getElementById('berat').value;
     var harga = document.getElementById('total').value;
-    var hasil = parseInt(harga) * parseInt(berat);
+    var hasil = parseInt(harga) * parseFloat(berat);
     console.log(berat);
     console.log(harga);
     console.log(hasil);
