@@ -176,7 +176,7 @@ error_reporting (E_ALL ^ E_NOTICE);
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-archive"></i>
                 <p>
-                  Data Master
+                  Data Transaksi
                   <i class="fa fa-plus-circle right"></i>
                 </p>
               </a>
@@ -190,6 +190,14 @@ error_reporting (E_ALL ^ E_NOTICE);
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="?pages=tabungan" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                    Tabungan Nasabah
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="?pages=tarik" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
@@ -197,17 +205,14 @@ error_reporting (E_ALL ^ E_NOTICE);
                     </p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="?pages=tabungan" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>
-                    Tabungan Sampah
-                    </p>
-                  </a>
-                </li>
               </ul>
           </li>
-
+          <li class="nav-item">
+            <a href="?pages=nasabah" class="nav-link">
+              <i class="fas fa-users nav-icon"></i>
+              <p>Data Nasabah</p>
+            </a>
+          </li>
             <li class="nav-header">Laporan</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -239,14 +244,8 @@ error_reporting (E_ALL ^ E_NOTICE);
                 
               </ul>
             </li>
-            <li class="nav-item">
-            <a href="?pages=nasabah" class="nav-link">
-              <i class="fas fa-users nav-icon"></i>
-              <p>Data Nasabah</p>
-            </a>
-          </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="?pages=penjualan" class="nav-link">
               <i class="fa fa-shopping-basket nav-icon"></i>
               <p>Data Penjualan</p>
@@ -263,7 +262,7 @@ error_reporting (E_ALL ^ E_NOTICE);
               <i class="fas fa-user nav-icon"></i>
               <p>Manajemen User</p>
             </a>
-          </li>
+          </li> -->
 
             <li class="nav-header">Menu Lain</li>
             <li class="nav-item">
@@ -302,7 +301,7 @@ error_reporting (E_ALL ^ E_NOTICE);
               <a href="?pages=terbeli" class="nav-link">
                 <i class="fas fa-shopping-cart nav-icon"></i>
                 <p>
-                  Terbeli
+                  Riwayat Transaksi
                 </p>
               </a>
             </li>

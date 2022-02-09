@@ -82,9 +82,10 @@ function registrasiDatas($upload)
         }else
             {
               // $sql_insert = "INSERT INTO nasabah (id_nasabah, nama_asabah, alamat, no_hp) VALUES (
-              $sql_insert = "INSERT INTO nasabah (nama_nasabah, alamat) VALUES (
+              $sql_insert = "INSERT INTO nasabah (nama_nasabah, alamat, no_hp) VALUES (
                 '" . $_POST['nama'] . "',
-                '" . $_POST['alamat'] . "')";
+                '" . $_POST['alamat'] . "',
+                '" . $_POST['no_hp'] . "')";
 
                 $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
 

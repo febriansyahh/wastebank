@@ -95,9 +95,16 @@ if (isset($_POST['btnLogin'])) LoginUser();
                 </div>
               </div>
             </div>
-            <div class="form-group">
-            <label>Foto Pengguna</label>
-            <input class="form-control " type="file" name="fotoUser" required>
+            <div class="row">
+                <div class="col-6">
+                <label>Foto Nasabah</label>
+                <input class="form-control " type="file" name="fotoUser" required>
+                </div>
+
+                <div class="col-6">
+                <label>No Hp</label>
+                <input class="form-control " type="text" name="no_hp" placeholder="Masukkan No HP anda" required>
+                </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
