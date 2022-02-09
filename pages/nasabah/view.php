@@ -22,9 +22,10 @@ include_once("koneksi.php");
                           <th>No</th>
                           <th>Nasabah</th>
                           <th>Alamat</th>
+                          <th>No HP</th>
                           <th>Foto</th>
                           <th>Piihan</th>
-                      </tr>
+                        </tr>
                         </center>
                   </thead>
                   <tbody>
@@ -37,7 +38,7 @@ include_once("koneksi.php");
                   <td><?php echo $no; ?></td>
                   <td><?php echo $data['nama_nasabah']; ?></td>
                   <td><?php echo $data['alamat']; ?></td>
-                  <!-- <td><?php echo $data['no_hp']; ?></td> -->
+                  <td><?php echo $data['no_hp']; ?></td>
                   <?php
                   if($data['foto_user'] != NULL){
                   ?>

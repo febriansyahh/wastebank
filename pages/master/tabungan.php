@@ -25,7 +25,7 @@ error_reporting (E_ALL ^ E_NOTICE);
                             <th>Nama Nasabah</th>
                             <th>Alamat</th>
                             <th>Saldo Terakhir</th>
-                            <th>Tgl Proses Terakhir</th>
+                            <!-- <th>Tgl Proses Terakhir</th> -->
                             <th>Pilihan</th>
                           </tr>
                         </center>
@@ -40,8 +40,8 @@ error_reporting (E_ALL ^ E_NOTICE);
                           <td><?php echo $no; ?></td>
                           <td><?php echo $data['nama_nasabah']; ?></td>
                           <td><?php echo $data['alamat']; ?></td>
-                          <td style="text-align: right;">Rp. <?php echo $data['jumlah_tabungan']; ?></td>
-                          <td><?php echo date('d-M-Y H:i:s', strtotime($data['update_terakhir'])); ?></td>
+                          <td style="text-align: right;">Rp. <?php echo $data['total']; ?></td>
+                          <!-- <td><?php echo date('d-M-Y H:i:s', strtotime($data['update_terakhir'])); ?></td> -->
                           <td>
                             <a href="javascript:void(0)" data-toggle="modal" data-target="#editPerusahaan" onclick="editableTabungan(this)" data-id="<?php echo $data['id_tabungan'] . "~" . $data['id_nasabah'] . "~" . $data['nama_nasabah'] . "~" . $data['jumlah_tabungan']  ?>"  class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
                             <a href="?pages=sampah_aksi&kode=<?php echo $data['idSampah']; ?>"

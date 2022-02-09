@@ -13,7 +13,7 @@ $pdf->ln(1);
 $pdf->SetFont('Helvetica','B',12);
 $pdf->Image('logo.png', 10, 1, 2, 'C');
 $pdf->Cell(18,0.7,"Laporan Data Nasabah",0,10,'C');
-$pdf->Cell(18,0.7,"BANK SAMPAH",0,10,'C');
+$pdf->Cell(18,0.7,"Bank Sampah Mustika Melati",0,10,'C');
 $pdf->ln(1);
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(5,0.7,"Printed On : ".date("D-d/M/Y"),0,0,'C');

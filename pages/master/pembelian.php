@@ -184,7 +184,6 @@ error_reporting (E_ALL ^ E_NOTICE);
                   ?>
                 </select>
               </div>
-            </div>
               <div class="row">
                 <div class="col-6">
                   <label>Nasabah </label>
@@ -202,8 +201,8 @@ error_reporting (E_ALL ^ E_NOTICE);
                 <label>Tanggal </label>
                 <input type="date" class="form-control" name="tanggal" id="editTanggal" required>
               </div>
-
             </div>
+
             <div class="row">
               <div class="col-6">
                 <label>Total Harga </label>

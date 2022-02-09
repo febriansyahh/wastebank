@@ -24,11 +24,14 @@ error_reporting (E_ALL ^ E_NOTICE);
                     
                     <?php
                       }else{
+                        $ceks = cekTarik($data_id);
+                        while($rows= mysqli_fetch_array($ceks)){
                     ?>
-                    <h5 style="font-family: Poppins">Saldo Anda Rp. <?php echo $row[0] ?> </h5>
+                    <h5 style="font-family: Poppins">Saldo Anda Rp. <?php echo $row[0] - $rows[0] ?> </h5>
                     <?php
                       }
                     }
+                  }
                     ?>
                 <table id="example2" class="table table-bordered table-hover">
                 <thead>
@@ -49,7 +52,7 @@ error_reporting (E_ALL ^ E_NOTICE);
                         <tr>
                           <td><?php echo $no; ?></td>
                           <td>Rp. <?php echo $data['jumlah']; ?></td>
-                          <td><?php echo $data['tanggal']; ?></td>
+                          <td><?php echo date('d-m-Y', strtotime($data['tanggal'])); ?></td>
                           <!-- <td>
                             <a href="javascript:void(0)" data-toggle="modal" data-target="#editPerusahaan" onclick="editableSampah(this)" data-id="<?php echo $data['id_sampah'] . "~" . $data['kode_sampah'] . "~" . $data['nama_sampah'] . "~" . $data['id_jenis'] . "~" . $data['harga']  ?>"  class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
                             <a href="?pages=sampah_aksi&kode=<?php echo $data['idSampah']; ?>"
