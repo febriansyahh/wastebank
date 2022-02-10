@@ -264,7 +264,5 @@ error_reporting (E_ALL ^ E_NOTICE);
     if (!isNaN(berat) && !isNaN(harga)) {
       document.getElementById('harga').value = hasil;
     }
-
   }
-
 </script>

@@ -17,19 +17,26 @@ error_reporting (E_ALL ^ E_NOTICE);
               <div class="card-body">
                 <?php
                 $cek = cekSaldo($data_id);
+                $ceks = cekTarik($data_id);
                 while($row = mysqli_fetch_array($cek)){
                   if($row[0] == NULL){
                     ?>
                     <h5 style="font-family: Poppins">Saldo Anda Rp. - </h5>
-                    
                     <?php
+                  }else{
+                    while($tarik = mysqli_fetch_array($ceks)){
+                      if($tarik[0] == NULL){
+                      ?>
+                      <h5 style="font-family: Poppins">Saldo Anda Rp. <?php echo $row[0] ?> </h5>
+                      <?php
                       }else{
-                        $ceks = cekTarik($data_id);
-                        while($rows= mysqli_fetch_array($ceks)){
-                    ?>
-                    <h5 style="font-family: Poppins">Saldo Anda Rp. <?php echo $row[0] - $rows[0] ?> </h5>
-                    <?php
+                      ?>
+                      <h5 style="font-family: Poppins">Saldo Anda Rp. <?php echo $row[0] - $tarik[0]?> </h5>
+                      <?php
                       }
+                      }
+                      ?>
+                    <?php
                     }
                   }
                     ?>

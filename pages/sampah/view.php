@@ -43,7 +43,7 @@ error_reporting (E_ALL ^ E_NOTICE);
                           <td><?php echo $data['nama_sampah']; ?></td>
                           <td><?php echo $data['jenis_sampah']; ?></td>
                           <!-- <?php
-                          if ($data['daur_ulang'] == '1') {
+                          if ($data['id_jenis'] == '1') {
                           ?>
                           <td>Produk Daur Ulang</td>
                           <?php
@@ -56,7 +56,7 @@ error_reporting (E_ALL ^ E_NOTICE);
                           <td><?php echo $data['harga']; ?></td>
                           <td>
                             <a href="javascript:void(0)" data-toggle="modal" data-target="#editPerusahaan" onclick="editableSampah(this)" data-id="<?php echo $data['id_sampah'] . "~" . $data['kode_sampah'] . "~" . $data['nama_sampah'] . "~" . $data['id_jenis'] . "~" . $data['harga']  ?>"  class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
-                            <a href="?pages=sampah_aksi&kode=<?php echo $data['idSampah']; ?>"
+                            <a href="?pages=sampah_aksi&kode=<?php echo $data['id_sampah']; ?>"
                               onclick="return confirm('Apakah anda yakin hapus data ini ?')"
                               class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a>
                           </td>

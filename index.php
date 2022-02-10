@@ -287,7 +287,7 @@ error_reporting (E_ALL ^ E_NOTICE);
               <a href="?pages=saldo" class="nav-link">
                 <i class="nav-icon fas fa-receipt"></i>
                 <p>
-                  Info Saldo Penarikan
+                  Info Saldo
                 </p>
               </a>
             </li>

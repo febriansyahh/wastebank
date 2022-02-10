@@ -258,7 +258,6 @@ function updateSampah()
   $sql_ubah = "UPDATE sampah SET
         nama_sampah = '". $_POST['nama'] ."',
         id_jenis='" . $_POST['jenis'] . "',
-        daur_ulang='" . $_POST['jenis'] . "',
         harga='" . $_POST['harga'] . "'
         WHERE id_sampah='" . $_POST['id_sampah'] . "'";
   $query_ubah = mysqli_query($con, $sql_ubah);
@@ -375,10 +374,10 @@ function deleteNasabah($id)
   
   if ($query_hapus && $query_hps) {
     echo "<script>alert('Hapus Berhasil')</script>";
-    echo "<meta http-equiv='refresh' content='0; url=index.php?pages=siswa'>";
+    echo "<meta http-equiv='refresh' content='0; url=index.php?pages=nasabah'>";
   } else {
     echo "<script>alert('Hapus Gagal')</script>";
-    echo "<meta http-equiv='refresh' content='0; url=index.php?pages=siswa'>";
+    echo "<meta http-equiv='refresh' content='0; url=index.php?pages=nasabah'>";
   }
 }
 
@@ -685,33 +684,48 @@ function updatePembelian()
   global $con;
   $nasabah = $_POST['id_nasabah'];
   $pilihan = $_POST['pilihan'];
-  $total = $_POST['total'];
-
-  $cek_nasabah = "SELECT id_nasabah, jumlah_tabungan FROM tabungan WHERE id_nasabah='$nasabah'";
-  $query = mysqli_query($con, $cek_nasabah);
-  $row = mysqli_fetch_row($query);
-  $nasabah = $row[0];
-  $tabungan = $row[1];
+  $total = $_POST['harga'];
 
   $date = date('Y-m-d H:i:s');
   if($pilihan == '0'){
 
-    $total = $tabungan - $total;
-    // $sql_ubah = "UPDATE tabungan SET
-    //       jumlah_tabungan ='" . $total . "',
-    //       update_terakhir = '$date'
-    //       WHERE id_nasabah = '$nasabah'";
-    $sql_ubah = "DELETE FROM tabungan WHERE id_nasabah ='$nasabah' AND jumlah_tabungan = '$tabungan' ";
-    $query_tabungan= mysqli_query($con, $sql_ubah);
-  }
+    $sql_tabung = "DELETE FROM tabungan WHERE id_nasabah ='$nasabah' AND jumlah_tabungan = '$total' ";
+    $query_tabungan= mysqli_query($con, $sql_tabung);
+
+    $sql_ubah = "UPDATE pembelian SET
+        id_sampah = '". $_POST['id_sampah'] ."',
+        id_nasabah = '" . $_POST['id_nasabah'] . "',
+        tanggal = '" . $_POST['tanggal'] . "',
+        total = '" . $_POST['harga'] . "',
+        pilihan = '" . $_POST['pilihan'] . "',
+        tgl_proses = '" . $date . "'
+        WHERE id_pembelian = '" . $_POST['id_pembelian'] . "'";
+
+    $query_ubah = mysqli_query($con, $sql_ubah);
+
+    if ($query_ubah && $query_tabungan) {
+      echo "<script>alert('Ubah Berhasil')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
+    } else {
+      echo "<script>alert('Ubah Gagal')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
+    }
+    
+  }else{
+    $sql_insert = "INSERT INTO tabungan (id_nasabah, jumlah_tabungan, update_terakhir) VALUES (
+      '" . $_POST['id_nasabah'] . "',
+      '" . $total . "',
+      '" . $date . "')";
+
+    $query_tabungan = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
 
   $sql_ubah = "UPDATE pembelian SET
         id_sampah = '". $_POST['id_sampah'] ."',
         id_nasabah = '" . $_POST['id_nasabah'] . "',
         tanggal = '" . $_POST['tanggal'] . "',
-        berat = '" . $_POST['berat'] . "',
-        total = '" . $_POST['total'] . "',
-        pilihan = '" . $_POST['pilihan'] . "'
+        total = '" . $_POST['harga'] . "',
+        pilihan = '" . $_POST['pilihan'] . "',
+        tgl_proses = '" . $date . "'
         WHERE id_pembelian = '" . $_POST['id_pembelian'] . "'";
 
   $query_ubah = mysqli_query($con, $sql_ubah);
@@ -723,6 +737,7 @@ function updatePembelian()
     echo "<script>alert('Ubah Gagal')</script>";
     echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
   }
+}
 }
 
 function deletePembelian($id)
@@ -739,18 +754,6 @@ function deletePembelian($id)
   $date = date('Y-m-d H:i:s');
 
   if($pilihan == '1'){
-
-    // $cek_tabungan = "SELECT jumlah_tabungan FROM tabungan WHERE id_nasabah='$nasabah'";
-    // $query = mysqli_query($con, $cek_tabungan);
-    // $rows = mysqli_fetch_row($query);
-    // $tabungan = $rows[0];
-
-    // $harga_cek = $tabungan - $total;
-
-    // $sql_ubah = "UPDATE tabungan SET
-    //     jumlah_tabungan ='" . $harga_cek . "',
-    //     update_terakhir = '$date'
-    //     WHERE id_nasabah = '$nasabah'";
     $sql_ubah = "DELETE FROM tabungan WHERE id_nasabah ='$nasabah' AND jumlah_tabungan = '$total' ";
     $query_ubah = mysqli_query($con, $sql_ubah);
 

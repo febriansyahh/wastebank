@@ -21,7 +21,7 @@
           case '1':
             ?>
       <div class="row">
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-6 col-6">
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
@@ -36,14 +36,14 @@
               <p>Nasabah Aktif</p>
             </div>
             <div class="icon">
-              <i class="ion ion-briefcase"></i>
+              <i class="fas fa-user-alt"></i>
             </div>
             <a href="?pages=nasabah" class="small-box-footer">Lihat selengkapnya <i
                 class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-6 col-6">
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
@@ -64,9 +64,8 @@
                 class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
+
+        <!-- <div class="col-lg-3 col-6">
           <div class="small-box bg-warning">
             <div class="inner">
               <h3><?php
@@ -76,7 +75,6 @@
                         echo  $row[0]."";
                     }
                     ?></h3>
-
               <p>Produk Daur Ulang</p>
             </div>
             <div class="icon">
@@ -85,10 +83,9 @@
             <a href="?pages=produk" class="small-box-footer">Lihat selengkapnya <i
                 class="fas fa-arrow-circle-right"></i></a>
           </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
+        </div> -->
+        
+        <!-- <div class="col-lg-3 col-6">
           <div class="small-box" style="background-color: #9CDF51;">
             <div class="inner">
               <h3><?php
@@ -98,7 +95,6 @@
                         echo  $row[0]."";
                     }
                     ?></h3>
-
               <p>Transaksi Penjualan</p>
             </div>
             <div class="icon">
@@ -107,8 +103,7 @@
             <a href="?pages=penjualan" class="small-box-footer">Lihat selengkapnya <i
                 class="fas fa-arrow-circle-right"></i></a>
           </div>
-        </div>
-        <!-- ./col -->
+        </div> -->
       </div>
       <?php
           break;
