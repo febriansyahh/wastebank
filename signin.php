@@ -37,7 +37,8 @@ if (isset($_POST['btnLogin'])) LoginUser();
                       <center>
                         <div class="card-body">
                             <div class="brand-wrapper">
-                                <img src="assets/img/loginbank.png" alt="logo" class="logo" style="width:80%; height:15%">
+                                <img src="assets/img/group.png" alt="logo" class="logo" style="width:80%; height:15%"><br>
+                                <!-- <h6>Desa Getas Pejaten Kecamatan Jati Kabupaten Kudus</h6> -->
                             </div>
                             <form action="" method="post">
                                 <div class="form-group">

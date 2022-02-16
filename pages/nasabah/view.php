@@ -43,14 +43,14 @@ include_once("koneksi.php");
                   if($data['foto_user'] != NULL){
                   ?>
                   <td>
-                    <img src=<?php echo "./file_data/foto/". $data['foto_user']; ?> style="width: 20%; height: 20%;"
+                    <img src=<?php echo "./pages/file_data/foto/". $data['foto_user']; ?> style="width: 20%; height: 20%;"
                       alt="" class="center">
                   </td>
                   <?php
                   }else{
                   ?>
                   <td>
-                    <img src= "./file_data/foto/default.png" style="width: 20%; height: 20%;"
+                    <img src= "./pages/file_data/foto/default.png" style="width: 20%; height: 20%;"
                       alt="" class="center">
                   </td>
                   <?php

@@ -1,6 +1,6 @@
 <?php	
 include_once("koneksi.php");
-$maxID = MaxIdProgram();
+$cekSaldo = cekSaldo($data_id);
 error_reporting();
 error_reporting (E_ALL ^ E_NOTICE); 
     ?>
@@ -15,31 +15,9 @@ error_reporting (E_ALL ^ E_NOTICE);
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <?php
-                $cek = cekSaldo($data_id);
-                $ceks = cekTarik($data_id);
-                while($row = mysqli_fetch_array($cek)){
-                  if($row[0] == NULL){
-                    ?>
-                    <h5 style="font-family: Poppins">Saldo Anda Rp. - </h5>
-                    <?php
-                  }else{
-                    while($tarik = mysqli_fetch_array($ceks)){
-                      if($tarik[0] == NULL){
-                      ?>
-                      <h5 style="font-family: Poppins">Saldo Anda Rp. <?php echo $row[0] ?> </h5>
-                      <?php
-                      }else{
-                      ?>
-                      <h5 style="font-family: Poppins">Saldo Anda Rp. <?php echo $row[0] - $tarik[0]?> </h5>
-                      <?php
-                      }
-                      }
-                      ?>
-                    <?php
-                    }
-                  }
-                    ?>
+              
+              <h5 style="font-family: Poppins">Saldo Anda Rp. <?php echo $cekSaldo ?> </h5>
+                
                 <table id="example2" class="table table-bordered table-hover">
                 <thead>
                         <center>
@@ -85,7 +63,5 @@ error_reporting (E_ALL ^ E_NOTICE);
       </div>
 
 </body>
-
-
-
 </html>
+

@@ -15,7 +15,6 @@ error_reporting (E_ALL ^ E_NOTICE);
                   class="fas fa-plus-square"></i> Tambah Data Sampah</a> -->
                 <h3 class="card-title">Data Tabungan Sampah</h3>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
                 <thead>
@@ -25,7 +24,6 @@ error_reporting (E_ALL ^ E_NOTICE);
                             <th>Nama Nasabah</th>
                             <th>Alamat</th>
                             <th>Saldo Terakhir</th>
-                            <!-- <th>Tgl Proses Terakhir</th> -->
                             <th>Pilihan</th>
                           </tr>
                         </center>

@@ -34,7 +34,6 @@ function LoginUser()
   }
 }
 
-
 function upload_foto($namePost, $codePost)
 {
   $ekstensi_diperbolehkan  = array('jpg', 'png', 'jpeg');
@@ -46,13 +45,11 @@ function upload_foto($namePost, $codePost)
   $namas = 'Foto_' . $named . "_" . $date ."." . $ekstensi;
   $ukuran = $_FILES[$namePost]['size'];
   $file_tmp = $_FILES[$namePost]['tmp_name'];
-
+  
   if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
     if ($ukuran < 41943040) {
       $destination_path = getcwd().DIRECTORY_SEPARATOR . 'file_data\foto' . '/';
-
       $target_path = $destination_path . $namas;
-
       @move_uploaded_file($file_tmp, $target_path);
       return $namas;
     } else {
@@ -73,9 +70,8 @@ function registrasiDatas($upload)
   $idDaftar = $row[0];
   $pass = $_POST['password'];
   $repass = $_POST['rePassword'];
- 
-  
   $tgl = date('Y-m-d H:i:s');
+  // die();
         if($pass != $repass){
           echo "<script>alert('Password tidak sama, Simpan Gagal !!')</script>";
           echo "<meta http-equiv='refresh' content='0; url=signin.php>";
@@ -960,7 +956,16 @@ function cekSaldo($id)
 
   $sql = "SELECT SUM(jumlah_tabungan) as jumlah_tabungan from tabungan where id_nasabah ='$id' GROUP BY id_nasabah";
   $query = mysqli_query($con, $sql);
-  return $query;
+  $row = mysqli_fetch_row($query);
+  $tabungan = $row[0];
+
+  $sql_tarik = "SELECT SUM(jumlah) FROM `penarikan` WHERE id_nasabah ='$id' GROUP BY id_nasabah";
+  $query_tarik = mysqli_query($con, $sql_tarik);
+  $rows = mysqli_fetch_row($query_tarik);
+  $tarik = $rows[0];
+
+  $result = $tabungan - $tarik;
+  return $result;
 }
 
 function cekTarik($id){

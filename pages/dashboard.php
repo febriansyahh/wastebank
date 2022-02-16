@@ -110,13 +110,13 @@
           default:
             ?>
       <?php
-                    break;
+          break;
         }
           ?>
       <center>
       <div class="card" style="border-radius: 15px; box-shadow: 0 5px 5px 0 rgba(128, 123, 123, 0.43)">
         <div class="text-center my-5">
-          <img src="dist/img/logo.png" width="150" height="150"><br>
+          <img src="images/logo.png" width="150" height="150"><br>
           <h3 class="display fw-bolder black-white mb-2" style="font-family: Poppins">Bank Sampah Mustika Melati
           </h3>
           <p class="lead text-black-50 mb-4" style="font-family: Poppins"><b>Jual, dan manfaatkan kembali sampah rumah tangga</b></p>

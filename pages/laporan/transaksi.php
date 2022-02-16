@@ -18,6 +18,7 @@ $pdf->SetFont('Helvetica','B',14);
 $pdf->Image('logo.png', 14, 1, 2, 'C');
 $pdf->Cell(25.5,0.7,"Laporan Transaksi Pembelian",0,10,'C');
 $pdf->Cell(25.5,0.7,"Bank Sampah Mustika Melati",0,10,'C');
+$pdf->Cell(25,0.7,"Ds. Getas Pejaten Kecamatan Jati Kabupaten Kudus",0,10,'C');
 $pdf->ln(1);
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(5,0.7,"Printed On : ".date("D-d/m/Y"),0,0,'C');

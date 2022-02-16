@@ -163,7 +163,7 @@ include_once("koneksi.php");
     xhtp.onload = function(){
       document.getElementById("tabungan").value = this.responseText;
     }
-    xhtp.open("GET", "./pages/master/get_tabungan.php?h=" + str);
+    xhtp.open("GET", "./pages/master/get_harga.php?h=" + str);
     xhtp.send();
   }
   function sum(){

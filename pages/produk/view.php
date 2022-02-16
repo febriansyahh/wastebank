@@ -47,7 +47,7 @@ error_reporting (E_ALL ^ E_NOTICE);
                   <td><?php echo $data['nama_barang']; ?></td>
                   <td><?php echo $data['harga']; ?></td>
                   <td>
-                    <img src=<?php echo "./file_data/barang/". $data['gambar']; ?> style="width: 50%; height: 50%;"
+                    <img src=<?php echo "./pages/file_data/barang/". $data['gambar']; ?> style="width: 50%; height: 50%;"
                       alt="">
                   </td>
                   <td><?php echo $data['keterangan']; ?></td>
@@ -99,7 +99,7 @@ error_reporting (E_ALL ^ E_NOTICE);
             <div class="" style="padding-left: 7px;"><i class="fas fa-recycle"></i>
               <h5 class="title"><?php echo $data['kode_barang'] ."-". $data['nama_barang'] ?></h5><br>
               <center>
-              <img src=<?php echo "./file_data/barang/". $data['gambar']; ?> style="width: 40%; height: 40%;"
+              <img src=<?php echo "./pages/file_data/barang/". $data['gambar']; ?> style="width: 40%; height: 40%;"
                       alt=""><br>
               </center>
               <p class="description" style="text-align: justify; padding-right: 5px;">
