@@ -1055,6 +1055,40 @@ function getTerbeli($id)
     $query = mysqli_query($con, $sql);
     return $query;
   }
+
+function sendBroadcast()
+{
+  global $con;
+
+  $query = mysqli_query($con, "SELECT tb.id_nasabah , ns.nama_nasabah, ns.no_hp, (sum(tb.jumlah_tabungan) - (SELECT sum(pn.jumlah) from penarikan pn, nasabah nsb where pn.id_nasabah = nsb.id_nasabah)) from nasabah ns, tabungan tb where tb.id_nasabah = ns.id_nasabah");
+
+  while($x = mysqli_fetch_array($query)) {
+    $ray = [
+      'nama' => (string)$x[1],
+      'no_hp' => (string)$x[2],
+      'saldo' => (string)$x[3]
+    ];
+
+    $smsText = "Kepada Saudara $ray[nama] Nasabah Bank Sampah Mustika Melati, Minggu akhir bulan akan diadakan kegiatan. Mohon Kedatangan nya. Terimakasih";
+    $sms = urlencode($smsText);
+    // var_dump($sms);
+    $url = 'https://websms.co.id/api/smsgateway?token=b42ee6e6e22ec64df97c11c59a20c915&to='.$ray['no_hp'].'&msg='.$sms.'';
+  
+    $header = array(
+    'Accept: application/json',
+    );
+  
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+    $result = curl_exec($ch);
+  
+    echo $result;
+  }
+
+}
 // function uploadBerkas($namePost, $nmLoker)
 // {
 //   $name = $_SESSION["ses_nama"];

@@ -9,4 +9,7 @@ if (isset($_POST['btnSimpan'])) {
 	if (isset($_GET['kode'])) {
     deleteNasabah($_GET['kode']);
 	}
+	if(isset($_GET['kirimBc'])) {
+		sendBroadcast();
+	}
 }

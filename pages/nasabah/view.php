@@ -4,7 +4,9 @@ include_once("koneksi.php");
 <div class="form-group">
   <br>
   <div class="container-fluid">
-   
+    <a href="?pages=nasabah_aksi&&kirimBc" class="btn btn-primary"><i class="fas fa-bullhorn"> </i> Kirim Pesan SMS</a>
+        <br>
+        <br>
        <div class="row">
           <div class="col-12">
             <div class="card">
@@ -71,6 +73,7 @@ include_once("koneksi.php");
   </div>
   </body>
   
+
 
   <div id="jurusan" class="modal fade">
   <div class="modal-dialog">
