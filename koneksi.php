@@ -4,7 +4,7 @@ define('USER', 'root');
 define('PASS', '');
 define('DB', 'banksampah');
 // define('DB','sosial');
-define ('SITE_ROOT', realpath(dirname(__FILE__)));
+define('SITE_ROOT', realpath(dirname(__FILE__)));
 
 $con = mysqli_connect(HOST, USER, PASS, DB) or die('Unable to Connect');
 
@@ -30,7 +30,6 @@ function LoginUser()
   } else {
     echo "<script>alert('Login Gagal!!')</script>";
     echo "<meta http-equiv='refresh' content='0; url=signin.php'>";
-
   }
 }
 
@@ -42,13 +41,13 @@ function upload_foto($namePost, $codePost)
   $nama = $_FILES[$namePost]['name'];
   $x = explode('.', $nama);
   $ekstensi = strtolower(end($x));
-  $namas = 'Foto_' . $named . "_" . $date ."." . $ekstensi;
+  $namas = 'Foto_' . $named . "_" . $date . "." . $ekstensi;
   $ukuran = $_FILES[$namePost]['size'];
   $file_tmp = $_FILES[$namePost]['tmp_name'];
-  
+
   if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
     if ($ukuran < 41943040) {
-      $destination_path = getcwd().DIRECTORY_SEPARATOR . 'file_data\foto' . '/';
+      $destination_path = getcwd() . DIRECTORY_SEPARATOR . 'file_data\foto' . '/';
       $target_path = $destination_path . $namas;
       @move_uploaded_file($file_tmp, $target_path);
       return $namas;
@@ -72,39 +71,38 @@ function registrasiDatas($upload)
   $repass = $_POST['rePassword'];
   $tgl = date('Y-m-d H:i:s');
   // die();
-        if($pass != $repass){
-          echo "<script>alert('Password tidak sama, Simpan Gagal !!')</script>";
-          echo "<meta http-equiv='refresh' content='0; url=signin.php>";
-        }else
-            {
-              // $sql_insert = "INSERT INTO nasabah (id_nasabah, nama_asabah, alamat, no_hp) VALUES (
-              $sql_insert = "INSERT INTO nasabah (nama_nasabah, alamat, no_hp) VALUES (
+  if ($pass != $repass) {
+    echo "<script>alert('Password tidak sama, Simpan Gagal !!')</script>";
+    echo "<meta http-equiv='refresh' content='0; url=signin.php>";
+  } else {
+    // $sql_insert = "INSERT INTO nasabah (id_nasabah, nama_asabah, alamat, no_hp) VALUES (
+    $sql_insert = "INSERT INTO nasabah (nama_nasabah, alamat, no_hp) VALUES (
                 '" . $_POST['nama'] . "',
                 '" . $_POST['alamat'] . "',
                 '" . $_POST['no_hp'] . "')";
 
-                $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
+    $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
 
-              $sql_insertUser = "INSERT INTO user (nama_user, username, password, foto_user, id_level, id_daftar, status, tgl_daftar) VALUES (
-                '". $_POST['nama'] ."',
+    $sql_insertUser = "INSERT INTO user (nama_user, username, password, foto_user, id_level, id_daftar, status, tgl_daftar) VALUES (
+                '" . $_POST['nama'] . "',
                 '" . $_POST['username'] . "',
                 '" . $_POST['password'] . "',
-                '". $upload ."',
+                '" . $upload . "',
                 '2',
                 '" . $idDaftar . "',
                 '1',
-                '".$tgl."')";
-          
-                $query_insertUser = mysqli_query($con, $sql_insertUser) or die(mysqli_connect_error());
-                
-                if ($query_insert && $query_insertUser) {
-                  echo "<script>alert('Registrasi Nasabah Berhasil')</script>";
-                  echo "<meta http-equiv='refresh' content='0; url=../signin.php'>";
-                } else {
-                  echo "<script>alert('Registrasi Nasabah Gagal')</script>";
-                  echo "<meta http-equiv='refresh' content='0; url=../signin.php'>";
-                }
-            }
+                '" . $tgl . "')";
+
+    $query_insertUser = mysqli_query($con, $sql_insertUser) or die(mysqli_connect_error());
+
+    if ($query_insert && $query_insertUser) {
+      echo "<script>alert('Registrasi Nasabah Berhasil')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=../signin.php'>";
+    } else {
+      echo "<script>alert('Registrasi Nasabah Gagal')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=../signin.php'>";
+    }
+  }
 }
 
 
@@ -189,17 +187,17 @@ function MaxIdProgram()
 
   $carikode = mysqli_query($con, "SELECT MAX(kode_sampah) FROM sampah");
   $datakode = mysqli_fetch_array($carikode);
-  $tahun = date ('Y');
+  $tahun = date('Y');
   if ($datakode) {
     // $nilaikode = substr($datakode[0], 3);
-    $nilaikode = substr($datakode[0],9);
+    $nilaikode = substr($datakode[0], 9);
     $kode = (int) $nilaikode;
     $kode = $kode + 1;
 
     // $hasilkode = "PLDN" . str_pad($kode, 2, "0", STR_PAD_LEFT);
-    $hasilkode = "JNS-". $tahun . "-" . str_pad($kode, 3, "0", STR_PAD_LEFT);
+    $hasilkode = "JNS-" . $tahun . "-" . str_pad($kode, 3, "0", STR_PAD_LEFT);
   } else {
-    $hasilkode = "JNS-". $tahun . "-001";
+    $hasilkode = "JNS-" . $tahun . "-001";
   }
 
   return $hasilkode;
@@ -211,17 +209,17 @@ function MaxIdProduk()
 
   $carikode = mysqli_query($con, "SELECT MAX(kode_barang) FROM produk");
   $datakode = mysqli_fetch_array($carikode);
-  $tahun = date ('Y');
+  $tahun = date('Y');
   if ($datakode) {
     // $nilaikode = substr($datakode[0], 3);
-    $nilaikode = substr($datakode[0],9);
+    $nilaikode = substr($datakode[0], 9);
     $kode = (int) $nilaikode;
     $kode = $kode + 1;
 
     // $hasilkode = "PLDN" . str_pad($kode, 2, "0", STR_PAD_LEFT);
-    $hasilkode = "PDU-". $tahun . "-" . str_pad($kode, 3, "0", STR_PAD_LEFT);
+    $hasilkode = "PDU-" . $tahun . "-" . str_pad($kode, 3, "0", STR_PAD_LEFT);
   } else {
-    $hasilkode = "PDU-". $tahun . "-001";
+    $hasilkode = "PDU-" . $tahun . "-001";
   }
 
   return $hasilkode;
@@ -252,7 +250,7 @@ function updateSampah()
   global $con;
 
   $sql_ubah = "UPDATE sampah SET
-        nama_sampah = '". $_POST['nama'] ."',
+        nama_sampah = '" . $_POST['nama'] . "',
         id_jenis='" . $_POST['jenis'] . "',
         harga='" . $_POST['harga'] . "'
         WHERE id_sampah='" . $_POST['id_sampah'] . "'";
@@ -302,49 +300,48 @@ function insertNasabah($upload)
   $idDaftar = $row[0];
   $pass = $_POST['password'];
   $repass = $_POST['rePassword'];
-  
-  
+
+
   $tgl = date('Y-m-d H:i:s');
-  if($pass != $repass){
-          echo "<script>alert('Password tidak sama, Simpan Gagal !!')</script>";
-          echo "<meta http-equiv='refresh' content='0; url=signin.php>";
-        }else
-            {
-              // $sql_insert = "INSERT INTO nasabah (id_nasabah, nama_asabah, alamat, no_hp) VALUES (
-              $sql_insert = "INSERT INTO nasabah (nama_nasabah, alamat) VALUES (
+  if ($pass != $repass) {
+    echo "<script>alert('Password tidak sama, Simpan Gagal !!')</script>";
+    echo "<meta http-equiv='refresh' content='0; url=signin.php>";
+  } else {
+    // $sql_insert = "INSERT INTO nasabah (id_nasabah, nama_asabah, alamat, no_hp) VALUES (
+    $sql_insert = "INSERT INTO nasabah (nama_nasabah, alamat) VALUES (
                 '" . $_POST['nama'] . "',
                 '" . $_POST['alamat'] . "')";
 
-                $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
+    $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
 
-              $sql_insertUser = "INSERT INTO user (nama_user, username, password, foto_user, id_level, id_daftar, status, tgl_daftar) VALUES (
-                '". $_POST['nama'] ."',
+    $sql_insertUser = "INSERT INTO user (nama_user, username, password, foto_user, id_level, id_daftar, status, tgl_daftar) VALUES (
+                '" . $_POST['nama'] . "',
                 '" . $_POST['username'] . "',
                 '" . $_POST['password'] . "',
-                '". $upload ."',
+                '" . $upload . "',
                 '2',
                 '" . $idDaftar . "',
                 '1',
-                '".$tgl."')";
-                
-                $query_insertUser = mysqli_query($con, $sql_insertUser) or die(mysqli_connect_error());
-                
-                if ($query_insert && $query_insertUser) {
-                  echo "<script>alert('Registrasi Nasabah Berhasil')</script>";
-                  echo "<meta http-equiv='refresh' content='0; url=index.php?pages=nasabah'>";
-                } else {
-                  echo "<script>alert('Registrasi Nasabah Gagal')</script>";
-                  echo "<meta http-equiv='refresh' content='0; url=index.php?pages=nasabah'>";
-                }
-              }
-            }
+                '" . $tgl . "')";
+
+    $query_insertUser = mysqli_query($con, $sql_insertUser) or die(mysqli_connect_error());
+
+    if ($query_insert && $query_insertUser) {
+      echo "<script>alert('Registrasi Nasabah Berhasil')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=nasabah'>";
+    } else {
+      echo "<script>alert('Registrasi Nasabah Gagal')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=nasabah'>";
+    }
+  }
+}
 
 function updateNasabah()
 {
   global $con;
 
   $sql_ubah = "UPDATE nasabah SET
-        nama_nasabah = '". $_POST['nama'] ."',
+        nama_nasabah = '" . $_POST['nama'] . "',
         alamat='" . $_POST['alamat'] . "'
         WHERE id_nasabah='" . $_POST['id_nasabah'] . "'";
   $query_ubah = mysqli_query($con, $sql_ubah);
@@ -361,13 +358,13 @@ function updateNasabah()
 function deleteNasabah($id)
 {
   global $con;
-  
+
   $sql_hapus = "DELETE FROM nasabah WHERE id_nasabah ='$id' ";
   $query_hapus = mysqli_query($con, $sql_hapus);
-  
+
   $sql_user = "DELETE FROM user WHERE id_daftar ='$id' ";
   $query_hps = mysqli_query($con, $sql_user);
-  
+
   if ($query_hapus && $query_hps) {
     echo "<script>alert('Hapus Berhasil')</script>";
     echo "<meta http-equiv='refresh' content='0; url=index.php?pages=nasabah'>";
@@ -380,7 +377,7 @@ function deleteNasabah($id)
 function selectUser()
 {
   global $con;
-  $sql ="SELECT * FROM `user` `a` JOIN `nasabah` `b` ON a.id_daftar=b.id_nasabah";
+  $sql = "SELECT * FROM `user` `a` JOIN `nasabah` `b` ON a.id_daftar=b.id_nasabah";
   $query = mysqli_query($con, $sql);
   return $query;
 }
@@ -388,19 +385,17 @@ function selectUser()
 function insertUser()
 {
   global $con;
-  
+
 
   $pass = $_POST['password'];
   $repass = $_POST['rePassword'];
-  
+
   $tgl = date('Y-m-d H:i:s');
-  if($pass != $repass){
+  if ($pass != $repass) {
     echo "<script>alert('Password tidak sama, Simpan Gagal !!')</script>";
     echo "<meta http-equiv='refresh' content='0; url=index.php?pages=user'>";
-    
-  }else
-      {
-        $sql_insert = "INSERT INTO user (nama, username, password, idLevel, idDaftar, status, tglDaftar) VALUES (
+  } else {
+    $sql_insert = "INSERT INTO user (nama, username, password, idLevel, idDaftar, status, tglDaftar) VALUES (
           '" . $_POST['nmUser'] . "',
           '" . $_POST['username'] . "',
           '" . $_POST['password'] . "',
@@ -408,16 +403,16 @@ function insertUser()
           '0',
           '1',
           '" . $tgl . "')";
-    
-          $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
-          if ($query_insert) {
-            echo "<script>alert('Simpan Berhasil')</script>";
-            echo "<meta http-equiv='refresh' content='0; url=index.php?pages=user'>";
-          } else {
-            echo "<script>alert('Simpan Gagal')</script>";
-            echo "<meta http-equiv='refresh' content='0; url=index.php?pages=user'>";
-          }
-      }
+
+    $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
+    if ($query_insert) {
+      echo "<script>alert('Simpan Berhasil')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=user'>";
+    } else {
+      echo "<script>alert('Simpan Gagal')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=user'>";
+    }
+  }
 }
 
 function updateUser()
@@ -500,13 +495,13 @@ function upload_gambar($namePost, $codePost)
   $nama = $_FILES[$namePost]['name'];
   $x = explode('.', $nama);
   $ekstensi = strtolower(end($x));
-  $namas = 'Produk_' . $named . "_" . $date ."." . $ekstensi;
+  $namas = 'Produk_' . $named . "_" . $date . "." . $ekstensi;
   $ukuran = $_FILES[$namePost]['size'];
   $file_tmp = $_FILES[$namePost]['tmp_name'];
 
   if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
     if ($ukuran < 41943040) {
-      $destination_path = getcwd().DIRECTORY_SEPARATOR . 'file_data\barang' . '/';
+      $destination_path = getcwd() . DIRECTORY_SEPARATOR . 'file_data\barang' . '/';
 
       $target_path = $destination_path . $namas;
 
@@ -550,7 +545,7 @@ function updateProduk($upload)
   $gambar = $row[0];
   unlink('file_data/produk/' . $gambar);
   $sql_ubah = "UPDATE produk SET
-        nama_barang = '". $_POST['nama'] ."',
+        nama_barang = '" . $_POST['nama'] . "',
         harga ='" . $_POST['harga'] . "',
         gambar ='" . $upload . "',
         keterangan='" . $_POST['keterangan'] . "'
@@ -574,7 +569,7 @@ function deleteProduk($id)
   $query = mysqli_query($con, $cek_gambar);
   $row = mysqli_fetch_row($query);
   $berkas = $row[0];
-  
+
   unlink('file_data/barang/' . $berkas);
 
   $sql_hapus = "DELETE FROM produk WHERE id_barang ='$id' ";
@@ -600,13 +595,14 @@ function getPembelian()
 function insertPembelian()
 {
   global $con;
+  
   $id = $_POST['id_nasabah'];
 
   $total = $_POST['harga'];
   $pilihan = $_POST['pilihan'];
   $id_nasabah = $_POST['id_nasabah'];
   $total = $_POST['harga'];
-  if($pilihan == '1'){
+  if ($pilihan == '1') {
 
     // $cek_nasabah = "SELECT id_nasabah, jumlah_tabungan FROM tabungan WHERE id_nasabah='$id_nasabah'";
     // $query = mysqli_query($con, $cek_nasabah);
@@ -628,7 +624,7 @@ function insertPembelian()
     //     '" . $_POST['id_nasabah'] . "',
     //     '" . $total . "',
     //     '" . $date . "')";
-  
+
     //   $query_tabungan = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
     // }
 
@@ -651,21 +647,20 @@ function insertPembelian()
     $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
 
     if ($query_insert && $query_tabungan) {
-      $getNumPhone = mysqli_fetch_assoc(mysqli_query($con, "SELECT no_hp from nasabah where id_nasabah = $id "));
-      $getSaldoPenarikans = mysqli_fetch_row(mysqli_query($con, "SELECT SUM(jumlah) as c from penarikan where id_nasabah = $id "));
-      $getSaldoTab        = mysqli_fetch_row(mysqli_query($con, "SELECT SUM(jumlah_tabungan) from tabungan where id_nasabah = $id"));
-    
-      $total = $getSaldoTab[0] - $getSaldoPenarikans[0];
-      // var_dump(strval($total) );
-      // die();
-      $smsText = "Total Saldo Anda adalah : ".strval($total)." ";
+      $getNumPhone = mysqli_fetch_assoc(mysqli_query($con, "SELECT no_hp, nama_nasabah from nasabah where id_nasabah = $id "));
+      // $getSaldoPenarikans = mysqli_fetch_row(mysqli_query($con, "SELECT IF(ISNULL(jumlah), 0, SUM(jumlah)) from penarikan where id_nasabah = $id "));
+      // $getSaldoTab        = mysqli_fetch_row(mysqli_query($con, "SELECT IF(ISNULL(jumlah_tabungan), 0, SUM(jumlah_tabungan)) from tabungan where id_nasabah = $id"));
+
+      // $totalz = $getSaldoTab[0] - $getSaldoPenarikans[0];
+
+      $smsText = "Berhasil Menambah Saldo Tabungan ".strval($getNumPhone['nama_nasabah'])." sebesar Rp " . strval($total) . " ";
       $sms = urlencode($smsText);
-      $url = 'https://websms.co.id/api/smsgateway?token=b42ee6e6e22ec64df97c11c59a20c915&to='.$getNumPhone['no_hp'].'&msg='.$sms.'';
-    
+      $url = 'https://websms.co.id/api/smsgateway?token=b42ee6e6e22ec64df97c11c59a20c915&to=' . $getNumPhone['no_hp'] . '&msg=' . $sms . '';
+
       $header = array(
         'Accept: application/json',
       );
-    
+
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, $url);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -673,13 +668,15 @@ function insertPembelian()
       curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
       $result = curl_exec($ch);
 
-      echo "<script>alert('Simpan Berhasil')</script>";
-      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
+      var_dump($result);
+
+      // echo "<script>alert('Simpan Berhasil')</script>";
+      // echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
     } else {
-    echo "<script>alert('Simpan Gagal')</script>";
-    echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
+      echo "<script>alert('Simpan Gagal')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
     }
-  }else{
+  } else {
     $sql_insert = "INSERT INTO pembelian (id_sampah, id_nasabah, tanggal, berat, total, pilihan) VALUES (
             '" . $_POST['id_sampah'] . "',
             '" . $_POST['id_nasabah'] . "',
@@ -691,6 +688,22 @@ function insertPembelian()
     $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
 
     if ($query_insert) {
+      $getNumPhone = mysqli_fetch_assoc(mysqli_query($con, "SELECT no_hp, nama_nasabah from nasabah where id_nasabah = $id "));
+
+      $smsText = "Hasil Penjualan Tunai ".strval($getNumPhone['nama_nasabah'])." sebesar : Rp " . strval($total) . " ";
+      $sms = urlencode($smsText);
+      $url = 'https://websms.co.id/api/smsgateway?token=b42ee6e6e22ec64df97c11c59a20c915&to=' . $getNumPhone['no_hp'] . '&msg=' . $sms . '';
+
+      $header = array(
+        'Accept: application/json',
+      );
+
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+      $result = curl_exec($ch);
       echo "<script>alert('Pembelian Berhasil')</script>";
       echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
     } else {
@@ -708,13 +721,13 @@ function updatePembelian()
   $total = $_POST['harga'];
 
   $date = date('Y-m-d H:i:s');
-  if($pilihan == '0'){
+  if ($pilihan == '0') {
 
     $sql_tabung = "DELETE FROM tabungan WHERE id_nasabah ='$nasabah' AND jumlah_tabungan = '$total' ";
-    $query_tabungan= mysqli_query($con, $sql_tabung);
+    $query_tabungan = mysqli_query($con, $sql_tabung);
 
     $sql_ubah = "UPDATE pembelian SET
-        id_sampah = '". $_POST['id_sampah'] ."',
+        id_sampah = '" . $_POST['id_sampah'] . "',
         id_nasabah = '" . $_POST['id_nasabah'] . "',
         tanggal = '" . $_POST['tanggal'] . "',
         total = '" . $_POST['harga'] . "',
@@ -731,8 +744,7 @@ function updatePembelian()
       echo "<script>alert('Ubah Gagal')</script>";
       echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
     }
-    
-  }else{
+  } else {
     $sql_insert = "INSERT INTO tabungan (id_nasabah, jumlah_tabungan, update_terakhir) VALUES (
       '" . $_POST['id_nasabah'] . "',
       '" . $total . "',
@@ -740,8 +752,8 @@ function updatePembelian()
 
     $query_tabungan = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
 
-  $sql_ubah = "UPDATE pembelian SET
-        id_sampah = '". $_POST['id_sampah'] ."',
+    $sql_ubah = "UPDATE pembelian SET
+        id_sampah = '" . $_POST['id_sampah'] . "',
         id_nasabah = '" . $_POST['id_nasabah'] . "',
         tanggal = '" . $_POST['tanggal'] . "',
         total = '" . $_POST['harga'] . "',
@@ -749,16 +761,16 @@ function updatePembelian()
         tgl_proses = '" . $date . "'
         WHERE id_pembelian = '" . $_POST['id_pembelian'] . "'";
 
-  $query_ubah = mysqli_query($con, $sql_ubah);
+    $query_ubah = mysqli_query($con, $sql_ubah);
 
-  if ($query_ubah && $query_tabungan) {
-    echo "<script>alert('Ubah Berhasil')</script>";
-    echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
-  } else {
-    echo "<script>alert('Ubah Gagal')</script>";
-    echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
+    if ($query_ubah && $query_tabungan) {
+      echo "<script>alert('Ubah Berhasil')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
+    } else {
+      echo "<script>alert('Ubah Gagal')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian'>";
+    }
   }
-}
 }
 
 function deletePembelian($id)
@@ -774,7 +786,7 @@ function deletePembelian($id)
 
   $date = date('Y-m-d H:i:s');
 
-  if($pilihan == '1'){
+  if ($pilihan == '1') {
     $sql_ubah = "DELETE FROM tabungan WHERE id_nasabah ='$nasabah' AND jumlah_tabungan = '$total' ";
     $query_ubah = mysqli_query($con, $sql_ubah);
 
@@ -788,8 +800,7 @@ function deletePembelian($id)
       echo "<script>alert('Hapus Gagal')</script>";
       echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian''>";
     }
-
-  }else{
+  } else {
     $sql_hapus = "DELETE FROM pembelian WHERE id_pembelian ='$id' ";
     $query_hapus = mysqli_query($con, $sql_hapus);
 
@@ -801,7 +812,6 @@ function deletePembelian($id)
       echo "<meta http-equiv='refresh' content='0; url=index.php?pages=pembelian''>";
     }
   }
-
 }
 
 function getTabungan()
@@ -822,15 +832,14 @@ function insertTabungan()
     '" . $_POST['jumlah'] . "',
     '" . $tgl . "')";
 
-    $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
-    if ($query_insert) {
-      echo "<script>alert('Simpan Berhasil')</script>";
-      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=tabungan'>";
-    } else {
-      echo "<script>alert('Simpan Gagal')</script>";
-      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=tabungan'>";
-    }
-      
+  $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
+  if ($query_insert) {
+    echo "<script>alert('Simpan Berhasil')</script>";
+    echo "<meta http-equiv='refresh' content='0; url=index.php?pages=tabungan'>";
+  } else {
+    echo "<script>alert('Simpan Gagal')</script>";
+    echo "<meta http-equiv='refresh' content='0; url=index.php?pages=tabungan'>";
+  }
 }
 
 function updateTabungan()
@@ -879,7 +888,7 @@ function getTarik()
 function insertTarik()
 {
   global $con;
-  
+
   $tgl = date('Y-m-d H:i:s');
   $nasabah = $_POST['id_nasabah'];
   $penarikan = $_POST['penarikan'];
@@ -889,7 +898,7 @@ function insertTarik()
   $rows = mysqli_fetch_row($query);
   $id_tabungan = $rows[0];
   // $tabungan = $rows[1];
-  
+
   // $saldo_akhir = $tabungan - $penarikan;
 
   // $sql_ubah = "UPDATE tabungan SET
@@ -905,13 +914,13 @@ function insertTarik()
 
   $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
 
-    if ($query_insert) {
-      echo "<script>alert('Penarikan Berhasil')</script>";
-      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=tarik'>";
-    } else {
-      echo "<script>alert('Penarikan Gagal')</script>";
-      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=tarik'>";
-    }
+  if ($query_insert) {
+    echo "<script>alert('Penarikan Berhasil')</script>";
+    echo "<meta http-equiv='refresh' content='0; url=index.php?pages=tarik'>";
+  } else {
+    echo "<script>alert('Penarikan Gagal')</script>";
+    echo "<meta http-equiv='refresh' content='0; url=index.php?pages=tarik'>";
+  }
 }
 
 function updateTarik()
@@ -959,13 +968,13 @@ function deleteTarik($id)
 }
 
 function getPenjualan()
-  {
-    global $con;
-    $sql = "SELECT * FROM penjualan a, nasabah b WHERE a.id_nasabah=b.id_nasabah";
-    $query = mysqli_query($con, $sql);
-    return $query;
-  }
-  
+{
+  global $con;
+  $sql = "SELECT * FROM penjualan a, nasabah b WHERE a.id_nasabah=b.id_nasabah";
+  $query = mysqli_query($con, $sql);
+  return $query;
+}
+
 
 function getSaldo($id)
 {
@@ -993,7 +1002,8 @@ function cekSaldo($id)
   return $result;
 }
 
-function cekTarik($id){
+function cekTarik($id)
+{
   global $con;
   $sql_tarik = "SELECT SUM(jumlah) FROM `penarikan` WHERE id_nasabah ='$id' GROUP BY id_nasabah";
   $query_tarik = mysqli_query($con, $sql_tarik);
@@ -1011,30 +1021,30 @@ function getPembeli($id)
 }
 
 function insertPenjualan()
-  {
-    global $con;
-    $tgl = date('Y-m-d H:i:s');
-    $tgls = date('Y-m-d');
-    $nasabah = $_POST['id_nasabah'];
-    $pembayaran = $_POST['total'];
-    $metode = $_POST['pilihan'];
+{
+  global $con;
+  $tgl = date('Y-m-d H:i:s');
+  $tgls = date('Y-m-d');
+  $nasabah = $_POST['id_nasabah'];
+  $pembayaran = $_POST['total'];
+  $metode = $_POST['pilihan'];
 
-    if($metode == '1'){
-      $cek_tabungan = "SELECT id_tabungan,jumlah_tabungan FROM tabungan WHERE id_nasabah = '$nasabah'";
-      $query = mysqli_query($con, $cek_tabungan);
-      $row = mysqli_fetch_row($query);
-      $id_tabungan = $row[0];
-      $jumlah_tabungan = $row[1];
-      $saldo = $jumlah_tabungan - $pembayaran;
-        if($jumlah_tabungan < $pembayaran){
-          echo "<script>alert('Maaf saldo anda kurang, Silahkan ubah metode pembayaran')</script>";
-        }else{
-          $sql_ubah = "UPDATE tabungan SET
+  if ($metode == '1') {
+    $cek_tabungan = "SELECT id_tabungan,jumlah_tabungan FROM tabungan WHERE id_nasabah = '$nasabah'";
+    $query = mysqli_query($con, $cek_tabungan);
+    $row = mysqli_fetch_row($query);
+    $id_tabungan = $row[0];
+    $jumlah_tabungan = $row[1];
+    $saldo = $jumlah_tabungan - $pembayaran;
+    if ($jumlah_tabungan < $pembayaran) {
+      echo "<script>alert('Maaf saldo anda kurang, Silahkan ubah metode pembayaran')</script>";
+    } else {
+      $sql_ubah = "UPDATE tabungan SET
           jumlah_tabungan='" . $saldo . "'
           WHERE id_tabungan='" . $id_tabungan . "'";
-          $query_ubah = mysqli_query($con, $sql_ubah);
+      $query_ubah = mysqli_query($con, $sql_ubah);
 
-          $sql_insert = "INSERT INTO penjualan (id_barang, id_nasabah, tanggal, jumlah, total, pembayaran, tgl_proses) VALUES (
+      $sql_insert = "INSERT INTO penjualan (id_barang, id_nasabah, tanggal, jumlah, total, pembayaran, tgl_proses) VALUES (
             '" . $_POST['id_barang'] . "',
             '" . $_POST['id_nasabah'] . "',
             '$tgls',
@@ -1042,18 +1052,18 @@ function insertPenjualan()
             '" . $_POST['total'] . "',
             '" . $_POST['pilihan'] . "',
             '" . $tgl . "')";
-          $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
+      $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
 
-            if ($query_insert && $query_ubah) {
-              echo "<script>alert('Pembelian Berhasil')</script>";
-              echo "<meta http-equiv='refresh' content='0; url=index.php?pages=saldo'>";
-            } else {
-              echo "<script>alert('Pembelian Gagal')</script>";
-              echo "<meta http-equiv='refresh' content='0; url=index.php?pages=produk'>";
-            }
-        }
-    }else{
-      $sql_insert = "INSERT INTO penjualan (id_barang, id_nasabah, tanggal, jumlah, total, pembayaran, tgl_proses) VALUES (
+      if ($query_insert && $query_ubah) {
+        echo "<script>alert('Pembelian Berhasil')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?pages=saldo'>";
+      } else {
+        echo "<script>alert('Pembelian Gagal')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?pages=produk'>";
+      }
+    }
+  } else {
+    $sql_insert = "INSERT INTO penjualan (id_barang, id_nasabah, tanggal, jumlah, total, pembayaran, tgl_proses) VALUES (
         '" . $_POST['id_barang'] . "',
         '" . $_POST['id_nasabah'] . "',
         '$tgls',
@@ -1061,25 +1071,25 @@ function insertPenjualan()
         '" . $_POST['total'] . "',
         '" . $_POST['pilihan'] . "',
         '" . $tgl . "')";
-      $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
-  
-        if ($query_insert) {
-          echo "<script>alert('Pembelian Berhasil')</script>";
-          echo "<meta http-equiv='refresh' content='0; url=index.php?pages=saldo'>";
-        } else {
-          echo "<script>alert('Pembelian Gagal')</script>";
-          echo "<meta http-equiv='refresh' content='0; url=index.php?pages=produk'>";
-        }
-      }
+    $query_insert = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
+
+    if ($query_insert) {
+      echo "<script>alert('Pembelian Berhasil')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=saldo'>";
+    } else {
+      echo "<script>alert('Pembelian Gagal')</script>";
+      echo "<meta http-equiv='refresh' content='0; url=index.php?pages=produk'>";
     }
+  }
+}
 
 function getTerbeli($id)
-  {
-    global $con;
-    $sql = "SELECT * FROM penjualan a, produk b WHERE a.id_barang=b.id_barang AND a.id_nasabah = '$id' ";
-    $query = mysqli_query($con, $sql);
-    return $query;
-  }
+{
+  global $con;
+  $sql = "SELECT * FROM penjualan a, produk b WHERE a.id_barang=b.id_barang AND a.id_nasabah = '$id' ";
+  $query = mysqli_query($con, $sql);
+  return $query;
+}
 
 function sendBroadcast()
 {
@@ -1087,22 +1097,22 @@ function sendBroadcast()
 
   $queryx = mysqli_query($con, "SELECT nama_nasabah ,no_hp from nasabah");
 
-  while($x = mysqli_fetch_array($queryx)) {
+  while ($x = mysqli_fetch_array($queryx)) {
     $smsText = "Kepada Saudara $x[0] Nasabah Bank Sampah Mustika Melati, Minggu akhir bulan akan diadakan kegiatan. Mohon Kedatangan nya. Terimakasih";
     $sms = urlencode($smsText);
-    $url = 'https://websms.co.id/api/smsgateway?token=b42ee6e6e22ec64df97c11c59a20c915&to='.$x[1].'&msg='.$sms.'';
-  
+    $url = 'https://websms.co.id/api/smsgateway?token=b42ee6e6e22ec64df97c11c59a20c915&to=' . $x[1] . '&msg=' . $sms . '';
+
     $header = array(
-    'Accept: application/json',
+      'Accept: application/json',
     );
-  
+
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
     $result = curl_exec($ch);
-  
+
     echo $result;
   }
 
